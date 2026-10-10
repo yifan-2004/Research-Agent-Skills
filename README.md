@@ -1,56 +1,58 @@
 # Research Agent Skills
 
-12 个面向计算机视觉科研的原创 Agent Skills：从阅读论文到复现、评测、消融和论文修改。每个目录都可单独复制使用；无需一次加载整库。
+12 original Agent Skills for computer vision research, covering literature review, reproduction, evaluation, ablation studies, and manuscript revision. Copy and use each skill independently; there is no need to load the entire collection.
 
-> 当前版本：工作流已编写并通过结构检查，CSV 汇总工具已用合成夹具测试。尚未进行模型训练、真实数据集评测或多种 Agent 客户端端到端验证。
+**Language:** this README is in English. The original skill instructions and supporting research references are written in Chinese; skill identifiers and discovery descriptions are in English.
 
-## Skill 索引
+> Current status: all workflows pass structural validation, and the CSV summarizer has been tested with synthetic fixtures. No model training, real-dataset evaluation, or end-to-end validation across Agent clients has been performed.
 
-| 工作流 | 调用名称 |
+## Skill index
+
+| Workflow | Invocation name |
 | --- | --- |
-| [文献证据矩阵](skills/literature-evidence-matrix/SKILL.md) | `literature-evidence-matrix` |
-| [论文复现计划](skills/paper-reproduction-plan/SKILL.md) | `paper-reproduction-plan` |
-| [低照度增强评测](skills/lowlight-evaluation/SKILL.md) | `lowlight-evaluation` |
-| [单目 3D 结果可视化](skills/monocular-3d-visualization/SKILL.md) | `monocular-3d-visualization` |
-| [训练日志诊断](skills/training-log-diagnosis/SKILL.md) | `training-log-diagnosis` |
-| [消融实验设计](skills/ablation-experiment-plan/SKILL.md) | `ablation-experiment-plan` |
-| [有据可查的论文润色](skills/source-grounded-academic-editing/SKILL.md) | `source-grounded-academic-editing` |
-| [审稿回复证据整理](skills/reviewer-response-evidence/SKILL.md) | `reviewer-response-evidence` |
-| [科研图表规划](skills/research-figure-plan/SKILL.md) | `research-figure-plan` |
-| [实验报告汇总](skills/experiment-report/SKILL.md) | `experiment-report` |
-| [数据划分检查](skills/dataset-split-audit/SKILL.md) | `dataset-split-audit` |
-| [训练与评测预算规划](skills/compute-budget-plan/SKILL.md) | `compute-budget-plan` |
+| [Literature evidence matrix](skills/literature-evidence-matrix/SKILL.md) | `literature-evidence-matrix` |
+| [Paper reproduction plan](skills/paper-reproduction-plan/SKILL.md) | `paper-reproduction-plan` |
+| [Low-light enhancement evaluation](skills/lowlight-evaluation/SKILL.md) | `lowlight-evaluation` |
+| [Monocular 3D result visualization](skills/monocular-3d-visualization/SKILL.md) | `monocular-3d-visualization` |
+| [Training log diagnosis](skills/training-log-diagnosis/SKILL.md) | `training-log-diagnosis` |
+| [Ablation experiment planning](skills/ablation-experiment-plan/SKILL.md) | `ablation-experiment-plan` |
+| [Source-grounded academic editing](skills/source-grounded-academic-editing/SKILL.md) | `source-grounded-academic-editing` |
+| [Reviewer response evidence](skills/reviewer-response-evidence/SKILL.md) | `reviewer-response-evidence` |
+| [Research figure planning](skills/research-figure-plan/SKILL.md) | `research-figure-plan` |
+| [Experiment reporting](skills/experiment-report/SKILL.md) | `experiment-report` |
+| [Dataset split audit](skills/dataset-split-audit/SKILL.md) | `dataset-split-audit` |
+| [Training and evaluation budget planning](skills/compute-budget-plan/SKILL.md) | `compute-budget-plan` |
 
-## 使用
+## Usage
 
-将所需的单个目录复制到你使用的 Agent 的技能目录。例如 Codex 的常见个人目录为 `~/.codex/skills/`，具体配置以当前客户端为准：
+Copy the individual skill directory you need into your Agent's skill directory. For example, a common personal directory for Codex is `~/.codex/skills/`; follow your current client's configuration:
 
 ```sh
 mkdir -p ~/.codex/skills
 cp -R skills/lowlight-evaluation ~/.codex/skills/
 ```
 
-在 Agent 中调用 `$lowlight-evaluation`，并提供数据、论文或日志。安装本身不会下载权重、读取你的研究文件或运行训练。本仓库没有自动安装脚本。
+Invoke `$lowlight-evaluation` in your Agent and provide the relevant data, paper, or logs. Copying the skill does not download weights, read your research files, or run training. This repository contains no automatic installer.
 
-其他支持 `SKILL.md` 的客户端可按自身技能目录规范复制；兼容性尚未逐客户端测试。
+For other clients that support `SKILL.md`, use the client's own skill directory convention. Compatibility has not been tested individually across clients.
 
-## 示例：汇总多次实验
+## Example: summarize repeated experiments
 
-只有 `experiment-report` 的工具需要 **Python 3.9+**，仅用标准库，其余 Skill 是工作流说明。调用 Agent 仍需要你自己的模型服务；执行具体图像评测或可视化可能需要相应项目依赖，不包含在此仓库。
+Only the `experiment-report` utility requires **Python 3.9+**, and it uses the standard library. The other skills are workflow instructions. Your Agent still needs a model service; actual image evaluation or visualization may require dependencies from the relevant research project, which are not bundled here.
 
 ```sh
 python3 skills/experiment-report/scripts/summarize_metrics.py examples/metrics.synthetic.csv
 python3 -m unittest discover -s tests -v
 ```
 
-样例全是**人工合成数据**，不代表模型成绩。脚本按模型、数据集、split、protocol_id、指标分组，报告均值和样本标准差，拒绝重复 run/metric、非有限值与缺失字段。协议不同不会被混在一起。
+All sample values are **synthetic data**, not model results. The script groups measurements by model, dataset, split, protocol_id, and metric, then reports the mean and sample standard deviation. It rejects duplicate run/metric records, nonfinite values, and missing fields. Different protocols remain in separate groups.
 
-## 外部 Skill 资源
+## External skill resources
 
-[资源目录](CATALOG.md)收录 Anthropic 与 K-Dense 的官方仓库入口。它们是独立第三方项目，本仓库未复制或安装其 Skill；各自许可与依赖需单独确认。
+The [resource catalog](CATALOG.md) links to the official Anthropic and K-Dense repositories. These are independent third-party projects. Their skills have not been copied or installed in this repository; check each project's licenses and dependencies separately.
 
-## 贡献与许可
+## Contributions and license
 
-欢迎提交能解决具体科研问题的流程、真实的使用反馈与最小可复现的工具修复。新工具请提供行为测试，涉及实验结论请注明数据和协议。不得把未执行的实验写成已验证。
+Contributions should address a concrete research need, provide real usage feedback, or include a minimal reproducible tool fix. New tools should include behavior tests. Research conclusions should identify the data and protocol used. Do not describe experiments that were never run as validated results.
 
-本仓库新编写的 Skill、脚本、文档和合成样例采用 [MIT License](LICENSE)。外部链接资源保留各自许可。项目为个人科研工具集合，不代表任何大学或公司的官方项目。
+The newly written skills, scripts, documentation, and synthetic examples in this repository use the [MIT License](LICENSE). Linked external resources retain their own licenses. This is a personal research toolkit and does not represent an official university or company project.
