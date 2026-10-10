@@ -49,10 +49,8 @@ All sample values are **synthetic data**, not model results. The script groups m
 
 ## External skill resources
 
-The [resource catalog](CATALOG.md) links to the official Anthropic and K-Dense repositories. These are independent third-party projects. Their skills have not been copied or installed in this repository; check each project's licenses and dependencies separately.
+[Resource catalog](CATALOG.md). Check each linked skill's license and dependencies before installation.
 
-## Contributions and license
+## License
 
-Contributions should address a concrete research need, provide real usage feedback, or include a minimal reproducible tool fix. New tools should include behavior tests. Research conclusions should identify the data and protocol used. Do not describe experiments that were never run as validated results.
-
-The newly written skills, scripts, documentation, and synthetic examples in this repository use the [MIT License](LICENSE). Linked external resources retain their own licenses. This is a personal research toolkit and does not represent an official university or company project.
+[MIT](LICENSE). Linked external resources retain their own licenses.
